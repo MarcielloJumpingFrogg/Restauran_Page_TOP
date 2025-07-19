@@ -80,30 +80,47 @@ const page = [
 
 
 export default function() {
-    const container = document.getElementById('container')
-
-    page.forEach(parent => { 
-        console.log(parent.type)
-        let createdEl = document.createElement(parent.type) 
-        
-        /* Object.keys(parent).forEach(key => { 
-            if(typeof(parent[key]) == 'string')
-                {
-                    
-                }
-            }) */
-            
-        container.appendChild(createdEl)
-        
-        
-        /* console.log(typeof(e))
-        console.log((e[0]))
-        console.log((e.class))
-        console.log((e.content)) */
-        for(let i = 0; i < parent.content.length; i++)
-        { 
-            //console.log(Object.values(e.content[i]))
-            //mi serve per ogniuno dei miei item all'interno di content + per ogni item dentro div ecc.
-        }
-    })
+    navigatePage(page)
 }
+
+function addToPage(destination, child)
+{
+    destination.appenChild(child)
+}
+
+
+function navigatePage(nav, key) {
+    const container = document.getElementById('container')
+    let element 
+    if(typeof nav == 'string')
+    {
+        if(key == 'type')
+        {
+            element = document.createElement(nav)
+            element.classList.add(nav)
+            console.log(element)
+        } 
+    }
+    else if(Array.isArray(nav))
+    {
+        for(let i = 0; i < nav.length; i++)
+        {
+            if(key !== undefined)
+            {
+                navigatePage(nav[i], key[i]) 
+            }
+            else{
+                navigatePage(nav[i])
+            }
+
+        }
+        
+    }else if(typeof nav == 'object')
+        {
+            const converValuesToArray = Object.values(nav)
+            const convertKeysToArray = Object.values(Object.keys(nav))
+            navigatePage(converValuesToArray, convertKeysToArray)
+        }
+}
+
+navigatePage(page)

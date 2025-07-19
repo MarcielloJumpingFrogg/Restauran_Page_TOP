@@ -1,3 +1,4 @@
-export default function() {
-    console.log('questa e per la pagina del menu')
+export default function()
+{
+    console.log('ciao')
 }

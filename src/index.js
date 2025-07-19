@@ -1,13 +1,11 @@
 import './style.css'
 
 import homePage from './welcomePage'
-import menu from './menuPage'
+import menu  from './menuPage'
 import info from './aboutUsPage'
 
 
-const navButtons = document.getElementById("nav")
-
-
+const navButtons = document.getElementById("nav") 
 
 function clear() 
 {
@@ -39,5 +37,6 @@ navButtons.addEventListener("click", e => {
     { 
         handler()
     } 
+
 })
 
