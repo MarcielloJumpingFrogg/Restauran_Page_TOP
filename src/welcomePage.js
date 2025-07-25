@@ -1,12 +1,12 @@
 const page = [
     {   // -->0 / first div (review / good things about it)
         type : 'div',
-        class : 'container',
+        class : 'box',
         content : [
             {   //review
                 type : 'p',
                 class : '',
-                text : 'lorem stuff blabla',
+                text : 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae quibusdam ab non ex in quam, aperiam minus expedita eligendi inventore velit sunt vero ut itaque eius autem repellendus, ipsa impedit omnis, fugit natus. Nobis, quas.',
             },
 
             {   //reviewer
@@ -19,9 +19,14 @@ const page = [
 
     {   // --> 1 / second div (hours)
         type: 'div',
-        class: 'container',
+        class: 'box',
         content: [
             {
+                type : 'h3',
+                class: '',
+                text: 'Opening Hours',
+            }
+            ,{
                 type : 'p',
                 class : 'Monday',
                 text : 'Monday: 8:00 - 16:00',
@@ -61,8 +66,9 @@ const page = [
 
     {   // --> 2 / third div (where to find us)
         type: 'div',
-        class: 'container',
-        content: [
+        class: 'box',
+        content: 
+        [
             {   //title (location)
                 type: 'h3',
                 class: '',
@@ -77,40 +83,55 @@ const page = [
     }
 ]
 
+    const container = document.getElementById('container')
 
 
 export default function() {
     navigatePage(page)
 }
 
-function addToPage(destination, child)
-{
-    destination.appenChild(child)
-}
 
+function navigatePage(nav, key, destination) {
 
-function navigatePage(nav, key) {
-    const container = document.getElementById('container')
-    let element 
     if(typeof nav == 'string')
     {
-        if(key == 'type')
-        {
-            element = document.createElement(nav)
-            element.classList.add(nav)
-            console.log(element)
-        } 
+        
     }
     else if(Array.isArray(nav))
     {
         for(let i = 0; i < nav.length; i++)
         {
+
+            if(key !== undefined && key[i] == 'type')
+                { 
+                    const element = document.createElement(nav[i])
+                    if((nav[i + 1] !== '') && (key[ i + 1] == 'class'))     //basically box and other class having elements
+                    {
+                        element.classList.add(nav[i + 1]) 
+                    }
+                    if(key.includes('content'))
+                        {
+                            destination = element
+                            container.appendChild(element)
+                        }
+                        else
+                        {
+
+                            destination.appendChild(element)
+                        }
+                    if (key.includes('text'))
+                    { 
+                        element.innerText = nav[2]
+
+                    }
+                    
+                } 
             if(key !== undefined)
-            {
-                navigatePage(nav[i], key[i]) 
+            { 
+                navigatePage(nav[i], key[i], destination) 
             }
             else{
-                navigatePage(nav[i])
+                navigatePage(nav[i], undefined, destination) 
             }
 
         }
@@ -119,7 +140,7 @@ function navigatePage(nav, key) {
         {
             const converValuesToArray = Object.values(nav)
             const convertKeysToArray = Object.values(Object.keys(nav))
-            navigatePage(converValuesToArray, convertKeysToArray)
+            navigatePage(converValuesToArray, convertKeysToArray, destination)
         }
 }
 
