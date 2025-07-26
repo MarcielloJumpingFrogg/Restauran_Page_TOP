@@ -140,30 +140,30 @@ export default function()
 }
 
 
-const loadSection = document.getElementById('funContainer')
 
-const buttons = loadSection.querySelectorAll('button')      //there is no 'funContainer' quindi non sa cosa prendere (HHHHEEEEELP)
 
-const menuItem = document.querySelectorAll('.menuItem')
+container.addEventListener('click', function(e){
+    const buttonId = e.target.parentNode.id
+    const menuItem = document.querySelectorAll('.menuItem')
 
-for( let i = 0; i < buttons.length; i++)
-{ 
-    buttons[i].addEventListener('click', function(){
+
+    if(buttonId == 'funContainer')
+    {
         menuItem.forEach(element => {
             element.classList.remove('invisible')
         }); 
-        if(buttons[i].dataset.id != 'all')
+
+        if(e.target.dataset.id != 'all')
         {
             menuItem.forEach(element => {
-                
-                if(!element.classList.contains(buttons[i].dataset.id))
+                if(!element.classList.contains(e.target.dataset.id))
                 {
-                    element.classList.add('invisible') 
+                    element.classList.add('invisible')
                 }
             })
         }
-        
-    })
-}
+    }
+
+})
 
 

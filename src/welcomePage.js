@@ -117,8 +117,7 @@ function navigatePage(nav, key, destination) {
                                 container.appendChild(element)
                             }
                             else
-                            {
-    
+                            { 
                                 destination.appendChild(element)
                             }
                         if (key.includes('text'))
@@ -144,4 +143,4 @@ function navigatePage(nav, key, destination) {
         }
 }
 
-navigatePage(page)
+//navigatePage(page)
