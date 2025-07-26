@@ -1,3 +1,19 @@
-export default function() {
-    console.log('questa invece e aboutus page')
-}
+const contactInfo = [
+    {
+        
+    }
+]
+
+
+/* 
+    module: box
+    type: div
+    class: none
+    content: [
+        module: info
+        type: p
+        class: none
+        content
+    ]
+
+*/

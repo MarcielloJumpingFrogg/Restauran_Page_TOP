@@ -102,32 +102,32 @@ function navigatePage(nav, key, destination) {
         for(let i = 0; i < nav.length; i++)
         {
 
-            if(key !== undefined && key[i] == 'type')
-                { 
-                    const element = document.createElement(nav[i])
-                    if((nav[i + 1] !== '') && (key[ i + 1] == 'class'))     //basically box and other class having elements
-                    {
-                        element.classList.add(nav[i + 1]) 
-                    }
-                    if(key.includes('content'))
-                        {
-                            destination = element
-                            container.appendChild(element)
-                        }
-                        else
-                        {
-
-                            destination.appendChild(element)
-                        }
-                    if (key.includes('text'))
-                    { 
-                        element.innerText = nav[2]
-
-                    }
-                    
-                } 
             if(key !== undefined)
             { 
+                if(key[i] == 'type')
+                    { 
+                        const element = document.createElement(nav[i])
+                        if((nav[i + 1] !== '') && (key[ i + 1] == 'class'))     //basically box and other class having elements
+                        {
+                            element.classList.add(nav[i + 1]) 
+                        }
+                        if(key.includes('content'))
+                            {
+                                destination = element
+                                container.appendChild(element)
+                            }
+                            else
+                            {
+    
+                                destination.appendChild(element)
+                            }
+                        if (key.includes('text'))
+                        { 
+                            element.innerText = nav[2]
+    
+                        }
+                        
+                    } 
                 navigatePage(nav[i], key[i], destination) 
             }
             else{

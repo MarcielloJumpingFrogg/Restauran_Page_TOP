@@ -5,13 +5,18 @@ import menu  from './menuPage'
 import info from './aboutUsPage'
 
 
+
 const navButtons = document.getElementById("nav") 
 
 function clear() 
 {
-    //console.log("pressed")
-
-    //supposed to clear the #container
+    const container = document.getElementById('container') 
+    let child = container.lastChild
+    while (child)
+    {
+        container.removeChild(child)
+        child = container.lastChild
+    }
 }
 
 function homePages() {
@@ -22,9 +27,7 @@ const handlers = {
     homePage: homePage, 
     menu: menu,
     info: info
-};
-
-
+}; 
 
 navButtons.addEventListener("click", e => {
     clear()
