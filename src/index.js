@@ -32,16 +32,21 @@ const handlers = {
 homePage()
 
 navButtons.addEventListener("click", e => {
-    clear()
 
-    let button = e.target.id 
+    if(e.id != 'nav')
+    {
+        clear()
+
+        let button = e.target.id 
+        
+        const handler = handlers[button]
+        
+        if (handler)
+        { 
+            handler()
+        } 
+    }
     
-    const handler = handlers[button]
-
-    if (handler)
-    { 
-        handler()
-    } 
 
 })
 
