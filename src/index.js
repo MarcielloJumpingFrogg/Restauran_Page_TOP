@@ -31,16 +31,15 @@ const handlers = {
 
 homePage()
 
-navButtons.addEventListener("click", e => {
-
-    if(e.id != 'nav')
+navButtons.addEventListener("click", e => { 
+    if(e.target.id != 'nav')
     {
         clear()
 
         let button = e.target.id 
         
         const handler = handlers[button]
-        
+
         if (handler)
         { 
             handler()
