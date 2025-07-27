@@ -51,8 +51,10 @@ const contactInfo = [
     }
 ] 
 
+const container = document.getElementById('container')
 
-function generator(item, key)
+
+function generator(item, key, destination)
 { 
     //debugger
         if(Array.isArray(item))
@@ -61,40 +63,50 @@ function generator(item, key)
             
             for(let i = 0; i < item.length; i++)
             {
+                //console.log('item[i]= ', item[i])
                 if(key !== undefined)
                 {
-                    const element = document.createElement(item[key.indexOf('type')])
+                    const element = document.createElement(item[key.indexOf('type')]) 
 
-                    
+
                     if(item[key.indexOf('class')] == 'box')
                     {
                         element.classList.add(item[key.indexOf('class')])
                         console.log(item[key.indexOf('content')])
-                        generator(item[key.indexOf('content')])
+                        destination = element
+                        container.appendChild(element)
+                        generator(item[key.indexOf('content')], undefined, destination)
+                        break
                     }
                     else{
                         element.textContent = item[key.indexOf('content')]
-                        console.log(element)
+
+                        destination.appendChild(element)
+                        break
                     }
 
                     //posso vedere a cosa corrisponde key
                 }
                 else
                 { 
-                    generator(item[i], undefined)
+                    generator(item[i], undefined, destination)
                     //se lo e' allora ri-invoco in modo da poter cercarne il valore
                 }
             }
         } 
         else if (typeof item == 'object')
         { 
-            generator(Object.values(item), Object.values(Object.keys(item)))
+            generator(Object.values(item), Object.values(Object.keys(item)), destination)
             //se e' un object posso estrarre il valore di key 
         }
     }
 
 
-generator(contactInfo)
+export default function()
+{
+    generator(contactInfo, undefined, container) 
+}
+
 
 
 

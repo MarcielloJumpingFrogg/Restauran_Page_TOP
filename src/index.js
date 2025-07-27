@@ -29,6 +29,8 @@ const handlers = {
     info: info
 }; 
 
+homePage()
+
 navButtons.addEventListener("click", e => {
     clear()
 
