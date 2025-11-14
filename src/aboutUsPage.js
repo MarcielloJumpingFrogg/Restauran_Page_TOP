@@ -53,17 +53,20 @@ const contactInfo = [
 
 const container = document.getElementById('container')
 
+function domAppender(item, text, destination)
+{
+    
+}
+
 
 function generator(item, key, destination)
 { 
-    //debugger
         if(Array.isArray(item))
         {
             
             
             for(let i = 0; i < item.length; i++)
-            {
-                //console.log('item[i]= ', item[i])
+            { 
                 if(key !== undefined)
                 {
                     const element = document.createElement(item[key.indexOf('type')]) 
@@ -71,8 +74,7 @@ function generator(item, key, destination)
 
                     if(item[key.indexOf('class')] == 'box')
                     {
-                        element.classList.add(item[key.indexOf('class')])
-                        console.log(item[key.indexOf('content')])
+                        element.classList.add(item[key.indexOf('class')]) 
                         destination = element
                         container.appendChild(element)
                         generator(item[key.indexOf('content')], undefined, destination)
@@ -85,19 +87,16 @@ function generator(item, key, destination)
                         break
                     }
 
-                    //posso vedere a cosa corrisponde key
                 }
                 else
                 { 
-                    generator(item[i], undefined, destination)
-                    //se lo e' allora ri-invoco in modo da poter cercarne il valore
+                    generator(item[i], undefined, destination) 
                 }
             }
         } 
         else if (typeof item == 'object')
         { 
-            generator(Object.values(item), Object.values(Object.keys(item)), destination)
-            //se e' un object posso estrarre il valore di key 
+            generator(Object.values(item), Object.values(Object.keys(item)), destination) 
         }
     }
 
@@ -107,22 +106,3 @@ export default function()
     generator(contactInfo, undefined, container) 
 }
 
-
-
-
-/* 
-    problemi: 
-        gira 1 per ogni elemento dentro l'array
-
-    eeeeee:
-        risolve per ogni i
-            ma io lo risolvo in una volta sola D:
-            (basically io do sia type che classe che testo, ma il for(i) viaggia uno alla volta)
-
-
-    possibile risoluzione:
-        cambiare il modo in cui i funziona 
-
-        / fare in modo che si completi quando finisco di generare un item
-
-*/
